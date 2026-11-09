@@ -3,121 +3,155 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Brainrot Boost</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#100d1b;color:white;font-family:Arial,sans-serif}
-header{display:flex;justify-content:space-between;align-items:center;padding:18px}
-button{border:0;border-radius:12px;padding:12px;color:white;background:#792cff;font-size:15px}
-.logo{font-size:21px;font-weight:bold;color:#c69aff}
-.balance{background:#241a39;padding:10px 14px;border-radius:12px}
-main{padding:16px}
-h2{margin-top:12px}
-.subtitle{color:#aaa}
-.free{margin:20px 0;padding:20px;background:linear-gradient(135deg,#5422a5,#21133e);border-radius:18px;text-align:center}
-.free h2{margin-top:0}
-.cases{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.case{background:#211a30;border-radius:16px;padding:16px;text-align:center}
-.case .emoji{font-size:48px;margin:12px}
-.case p{color:#aaa;font-size:13px}
-.case button{width:100%}
-#result{margin-top:18px;text-align:center;font-size:19px}
-#timer{color:#d2b5ff;margin:12px}
-#menu{display:none;background:#1d1630;padding:20px}
-#menu button{display:block;width:100%;margin:8px 0;text-align:left;background:#302247}
-footer{text-align:center;color:#777;padding:25px;font-size:12px}
+body{margin:0;background:#0c0915;color:white;font-family:Arial,sans-serif}
+header{height:75px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:#151020;border-bottom:1px solid #34204e;position:sticky;top:0;z-index:5}
+.logo{font-weight:900;font-size:19px;color:#c69aff}
+.balance{background:#26183b;padding:11px;border-radius:12px;color:#ffd76a;font-weight:bold}
+.menu{font-size:25px;background:none;padding:5px}
+main{padding:16px;max-width:650px;margin:auto}
+h1{font-size:25px;margin:15px 0 5px}
+.sub{color:#a99dbb;font-size:14px;margin-bottom:23px}
+h2{font-size:19px;margin:25px 0 14px}
+.cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.case{background:linear-gradient(145deg,#251936,#171120);border:1px solid #493064;border-radius:17px;padding:13px;min-width:0;text-align:center;box-shadow:0 5px 20px #0005}
+.picture{height:105px;border-radius:13px;background:radial-gradient(circle,#603b91,#21152f 70%);display:flex;align-items:center;justify-content:center;font-size:58px;margin-bottom:12px}
+.case h3{font-size:15px;margin:7px 0}
+.desc{font-size:12px;color:#a99dbb;min-height:30px}
+.price{font-size:14px;color:#ffd76a;font-weight:bold;margin:10px}
+.open{width:100%;border:0;border-radius:10px;padding:12px;background:linear-gradient(90deg,#792cff,#a34dff);color:white;font-weight:bold}
+.free{border-color:#a56aff;background:linear-gradient(145deg,#392052,#1b1328)}
+.free .picture{background:radial-gradient(circle,#a66bff,#302044 70%)}
+.timer{font-size:12px;color:#d8bdff;margin:8px 0}
+button:disabled{opacity:.55}
+#result{font-size:14px;color:#e6d3ff;margin-top:10px;line-height:1.5}
+#side{display:none;background:#191226;padding:15px;border-bottom:1px solid #493064}
+#side button{display:block;width:100%;text-align:left;margin:6px 0;background:#302044;border:0;padding:13px;color:white;border-radius:10px}
+footer{text-align:center;color:#766b83;font-size:12px;padding:30px}
 </style>
 </head>
 <body>
+
 <header>
-<button onclick="toggleMenu()">☰</button>
+<button class="menu" onclick="toggleMenu()">☰</button>
 <div class="logo">BRAINROT BOOST</div>
 <div class="balance">🪙 <span id="coins">0</span></div>
 </header>
 
-<div id="menu">
-<button onclick="home()">🏠 Главная</button>
-<button onclick="alert('Коллекция появится позже')">🧠 Коллекция</button>
-<button onclick="alert('Улучшения появятся позже')">⚡ Апгрейд</button>
-<button onclick="alert('Профиль появится позже')">👤 Профиль</button>
+<div id="side">
+<button onclick="closeMenu()">🏠 Главная</button>
+<button onclick="alert('Коллекция скоро появится!')">🧠 Коллекция</button>
+<button onclick="alert('Апгрейд скоро появится!')">⚡ Апгрейд</button>
+<button onclick="alert('Профиль скоро появится!')">👤 Профиль</button>
 </div>
 
 <main>
-<h2>Привет, игрок! 👋</h2>
-<p class="subtitle">Добро пожаловать в мир Brainrot!</p>
+<h1>📦 Все кейсы</h1>
+<div class="sub">Выбирай кейс и пополняй свою коллекцию Brainrot!</div>
 
-<section class="free">
-<h2>🎁 Бесплатный кейс</h2>
-<p>Получай нового Brainrot каждые 12 часов!</p>
-<div id="timer"></div>
-<button id="openFree" onclick="openFreeCase()">ОТКРЫТЬ КЕЙС</button>
-<div id="result"></div>
-</section>
-
-<h2>📦 Наши кейсы</h2>
 <div class="cases">
-<div class="case">
-<div class="emoji">🧠</div>
-<b>Brainrot Case</b>
-<p>Обычные и редкие персонажи</p>
-<button onclick="alert('Скоро!')">Скоро</button>
+
+<div class="case free">
+<div class="picture">🎁</div>
+<h3>Бесплатный кейс</h3>
+<div class="desc">Случайный Brainrot каждые 12 часов</div>
+<div class="price">БЕСПЛАТНО</div>
+<div class="timer" id="timer">Проверяем...</div>
+<button class="open" id="freeBtn" onclick="openFree()">ОТКРЫТЬ</button>
+<div id="result"></div>
 </div>
+
 <div class="case">
-<div class="emoji">👑</div>
-<b>Legendary Case</b>
-<p>Коллекция легенд</p>
-<button onclick="alert('Скоро!')">Скоро</button>
+<div class="picture">🐟</div>
+<h3>Starter Case</h3>
+<div class="desc">Начни собирать свою коллекцию</div>
+<div class="price">🪙 500</div>
+<button class="open" onclick="comingSoon()">СКОРО</button>
 </div>
+
+<div class="case">
+<div class="picture">🐊</div>
+<h3>Rare Case</h3>
+<div class="desc">Коллекция редких Brainrot</div>
+<div class="price">🪙 1 500</div>
+<button class="open" onclick="comingSoon()">СКОРО</button>
+</div>
+
+<div class="case">
+<div class="picture">☕</div>
+<h3>Epic Case</h3>
+<div class="desc">Эпические персонажи</div>
+<div class="price">🪙 3 000</div>
+<button class="open" onclick="comingSoon()">СКОРО</button>
+</div>
+
+<div class="case">
+<div class="picture">👑</div>
+<h3>Legendary Case</h3>
+<div class="desc">Кейс с легендарной тематикой</div>
+<div class="price">🪙 5 000</div>
+<button class="open" onclick="comingSoon()">СКОРО</button>
+</div>
+
+<div class="case">
+<div class="picture">💎</div>
+<h3>Mystery Case</h3>
+<div class="desc">Особая коллекция персонажей</div>
+<div class="price">🪙 10 000</div>
+<button class="open" onclick="comingSoon()">СКОРО</button>
+</div>
+
 </div>
 </main>
 
 <footer>Brainrot Boost © 2026</footer>
 
 <script>
-let coins = Number(localStorage.getItem("bb_coins") || 0);
-let lastOpen = Number(localStorage.getItem("bb_last_open") || 0);
-const drops = [
-["Tralalero Tralala","Обычный","🐟"],
-["Bombardiro Crocodilo","Редкий","🐊"],
-["Ballerina Cappuccina","Эпический","☕"],
-["Tung Tung Tung Sahur","Легендарный","🥁"]
+let coins=Number(localStorage.getItem("bb_coins")||0);
+let last=Number(localStorage.getItem("bb_last_open")||0);
+const drops=[
+["Tralalero Tralala","🐟","Обычный"],
+["Bombardiro Crocodilo","🐊","Редкий"],
+["Ballerina Cappuccina","☕","Эпический"],
+["Tung Tung Tung Sahur","🥁","Легендарный"]
 ];
 
 function update(){
  document.getElementById("coins").textContent=coins;
- let left=12*60*60*1000-(Date.now()-lastOpen);
- let btn=document.getElementById("openFree");
+ let left=43200000-(Date.now()-last);
+ let btn=document.getElementById("freeBtn");
  if(left<=0){
   document.getElementById("timer").textContent="Кейс готов!";
   btn.disabled=false;
-  btn.textContent="ОТКРЫТЬ КЕЙС";
  }else{
   let h=Math.floor(left/3600000);
   let m=Math.floor(left%3600000/60000);
   let s=Math.floor(left%60000/1000);
   document.getElementById("timer").textContent=
-   "Следующий кейс через "+h+"ч "+m+"м "+s+"с";
+  "Следующий через "+h+"ч "+m+"м "+s+"с";
   btn.disabled=true;
-  btn.textContent="ПОКА НЕДОСТУПНО";
  }
 }
-function openFreeCase(){
- if(Date.now()-lastOpen<12*60*60*1000)return;
- let drop=drops[Math.floor(Math.random()*drops.length)];
- lastOpen=Date.now();
+function openFree(){
+ if(Date.now()-last<43200000)return;
+ let d=drops[Math.floor(Math.random()*drops.length)];
+ last=Date.now();
  coins+=100;
- localStorage.setItem("bb_last_open",lastOpen);
+ localStorage.setItem("bb_last_open",last);
  localStorage.setItem("bb_coins",coins);
  document.getElementById("result").innerHTML=
-  drop[2]+"<br><b>"+drop[0]+"</b><br>Редкость: "+drop[1]+"<br>+100 🪙";
+ d[1]+"<br><b>"+d[0]+"</b><br>"+d[2]+"<br>+100 🪙";
  update();
 }
 function toggleMenu(){
- let m=document.getElementById("menu");
- m.style.display=m.style.display==="block"?"none":"block";
+ let s=document.getElementById("side");
+ s.style.display=s.style.display==="block"?"none":"block";
 }
-function home(){document.getElementById("menu").style.display="none";}
+function closeMenu(){document.getElementById("side").style.display="none";}
+function comingSoon(){alert("Этот кейс скоро станет доступен!");}
 update();
 setInterval(update,1000);
 </script>
