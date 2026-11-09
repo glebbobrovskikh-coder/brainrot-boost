@@ -3,298 +3,165 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Brainrot Boost</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#0d0916;color:white;font-family:Arial,sans-serif}
-header{height:72px;background:#171020;border-bottom:1px solid #38234d;display:flex;align-items:center;justify-content:space-between;padding:0 14px;position:sticky;top:0;z-index:5}
-.logo{font-size:17px;font-weight:900;color:#c99aff}
-button{cursor:pointer;border:0;color:white;border-radius:11px;padding:12px;background:#7835cf;font-weight:bold}
-.menu{background:transparent;font-size:25px;padding:5px}
-.balance{background:#291b3d;padding:11px;border-radius:12px;color:#ffd76a}
-main{max-width:650px;margin:auto;padding:16px}
-h1{font-size:24px;margin-bottom:5px}
-.sub{color:#a99bb9;font-size:13px;margin-bottom:22px}
-.cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
-.case{background:linear-gradient(145deg,#281b39,#171020);border:1px solid #49305f;border-radius:17px;padding:12px;text-align:center;min-width:0}
-.picture{height:115px;border-radius:12px;background:radial-gradient(circle,#7545a0,#241630 72%);display:flex;align-items:center;justify-content:center;font-size:55px;margin-bottom:12px}
+body{margin:0;background:#100d19;color:white;font-family:Arial,sans-serif}
+header{height:65px;background:#191326;display:flex;align-items:center;
+justify-content:space-between;padding:0 15px;position:sticky;top:0;z-index:5;
+border-bottom:1px solid #392653}
+.menu-btn{font-size:27px;background:none;border:0;color:white;cursor:pointer}
+.logo{font-size:19px;font-weight:900;color:#c58aff}
+.balance{background:#291c3b;padding:10px 12px;border-radius:12px;color:#e2c3ff}
+main{padding:16px}
+h2{font-size:21px}
+.cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.case{background:linear-gradient(145deg,#26183b,#171222);
+border:1px solid #493064;border-radius:15px;padding:12px;text-align:center}
+.case-img{height:95px;display:grid;place-items:center;font-size:52px;
+background:#21152f;border-radius:12px;margin-bottom:10px}
 .case h3{font-size:15px;margin:7px 0}
-.desc{color:#a99bb9;font-size:12px;min-height:30px}
-.price{color:#ffd76a;font-weight:bold;font-size:14px;margin:10px}
-.case button{width:100%}
-.free{border-color:#a46aff}
-.free .picture{background:radial-gradient(circle,#a66bff,#302044)}
-.timer{font-size:11px;color:#d5baff;margin:8px 0}
-.disabled{background:#42374c;opacity:.7}
-#side{display:none;background:#1b1427;padding:12px}
-#side button{display:block;width:100%;text-align:left;margin:5px 0;background:#30213f}
-#inventory{display:none}
-.item{background:#21172e;border:1px solid #49305f;border-radius:12px;padding:13px;margin:9px 0;display:flex;justify-content:space-between;align-items:center}
-#modal{display:none;position:fixed;inset:0;background:#08050deF;z-index:10;align-items:center;justify-content:center;padding:16px}
-.window{width:100%;max-width:440px;background:linear-gradient(145deg,#29183e,#120d1d);border:1px solid #a56aff;border-radius:20px;padding:18px;text-align:center;overflow:hidden}
-.window h2{margin:4px 0 15px}
-.roulette{height:125px;overflow:hidden;position:relative;background:#0d0916;border:1px solid #7546a2;border-radius:12px}
-.roulette:after{content:"";position:absolute;left:50%;top:0;bottom:0;width:3px;background:#ffe078;box-shadow:0 0 12px #ffe078}
-.strip{display:flex;gap:8px;height:100%;align-items:center;transform:translateX(0);transition:transform 5s cubic-bezier(.08,.75,.12,1)}
-.tile{flex:0 0 96px;height:95px;background:#302044;border:1px solid #67428b;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:31px}
-.tile small{font-size:10px;color:#d6c2e9;margin-top:5px}
-#status{color:#cbb3e7;font-size:13px;margin:15px 0}
-#prize{display:none;margin:15px 0}
-#prizeEmoji{font-size:65px}
-#prizeName{font-size:20px;font-weight:bold;margin:8px}
-#prizeValue{color:#ffd76a;margin:8px}
-.actions{display:none;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}
-.actions button{font-size:12px;padding:13px 5px}
-.sell{background:#7540c5}
-.keep{background:#3a2b4c;border:1px solid #a56aff}
-.close{background:#44364f;margin-top:12px;width:100%}
-footer{text-align:center;color:#756a82;font-size:12px;padding:25px}
+.case p{color:#c8afd9;font-size:12px}
+.case button,.action{background:linear-gradient(90deg,#873bce,#b45aff);
+border:0;color:white;padding:11px;border-radius:10px;font-weight:bold;width:100%}
+#overlay{position:fixed;inset:0;background:#0009;z-index:9;display:none}
+#sidebar{position:fixed;left:0;top:0;bottom:0;width:280px;max-width:85%;
+background:#191326;z-index:10;padding:18px;transform:translateX(-110%);
+transition:.25s;overflow:auto;border-right:1px solid #583477}
+#sidebar.open{transform:translateX(0)}
+.profile{background:#2a1c3c;padding:17px;border-radius:15px;margin:15px 0}
+.avatar{font-size:35px}
+.profile p{color:#cbb4df;margin:7px 0}
+.nav{display:flex;align-items:center;gap:12px;width:100%;
+padding:14px;margin:5px 0;border:0;border-radius:10px;
+background:transparent;color:white;text-align:left;font-size:16px}
+.nav.active,.nav:active{background:#3a2452}
+.close{float:right;background:none;border:0;color:white;font-size:25px}
+.page{display:none}
+.page.active{display:block}
+.info{background:#21172e;padding:17px;border-radius:14px;margin-top:15px}
 </style>
 </head>
 <body>
 
 <header>
-<button class="menu" onclick="toggleMenu()">☰</button>
+<button class="menu-btn" onclick="openMenu()">☰</button>
 <div class="logo">BRAINROT BOOST</div>
-<div class="balance">🪙 <span id="coins">0</span></div>
+<div class="balance">🪙 <span id="coins">1000</span></div>
 </header>
 
-<div id="side">
-<button onclick="showCases()">🏠 Главная</button>
-<button onclick="showInventory()">🎒 Инвентарь</button>
+<div id="overlay" onclick="closeMenu()"></div>
+
+<aside id="sidebar">
+<button class="close" onclick="closeMenu()">×</button>
+<div class="profile">
+<div class="avatar">👤</div>
+<strong>Игрок Brainrot</strong>
+<p>🪙 Баланс: <span id="sideCoins">1000</span></p>
 </div>
+
+<button class="nav active" onclick="showPage('home',this)">🏠 Главная</button>
+<button class="nav" onclick="showPage('cases',this)">🎁 Кейсы</button>
+<button class="nav" onclick="showPage('upgrade',this)">⚡ Апгрейд</button>
+<button class="nav" onclick="showPage('inventory',this)">🎒 Инвентарь</button>
+<button class="nav" onclick="showPage('tasks',this)">🪙 Задания</button>
+<button class="nav" onclick="showPage('giveaways',this)">🎉 Розыгрыши</button>
+<button class="nav" onclick="showPage('referrals',this)">👥 Рефералы</button>
+<button class="nav" onclick="showPage('bonuses',this)">🎁 Бонусы</button>
+<button class="nav" onclick="showPage('help',this)">❓ Помощь</button>
+</aside>
 
 <main>
-<section id="casePage">
-<h1>📦 Все кейсы</h1>
-<div class="sub">Выбирай кейс и собирай свою коллекцию!</div>
-
+<section class="page active" id="home">
+<h2>🔥 Добро пожаловать!</h2>
+<p>Выбирай кейс и собирай свою коллекцию Brainrot.</p>
 <div class="cases">
-<div class="case free">
-<div class="picture">🎁</div>
+<div class="case">
+<div class="case-img">🎁</div>
 <h3>Бесплатный кейс</h3>
-<div class="desc">Случайный Brainrot каждые 12 часов</div>
-<div class="price">БЕСПЛАТНО</div>
-<div class="timer" id="timer"></div>
-<button id="freeBtn" onclick="openCase()">ОТКРЫТЬ</button>
+<p>Раз в 12 часов</p>
+<button onclick="alert('Скоро добавим открытие кейсов!')">Открыть</button>
 </div>
-
 <div class="case">
-<div class="picture">🐟</div>
-<h3>Starter Case</h3>
-<div class="desc">Начальный набор персонажей</div>
-<div class="price">🪙 500</div>
-<button class="disabled" disabled>СКОРО</button>
+<div class="case-img">📦</div>
+<h3>Обычный кейс</h3>
+<p>🪙 100 монет</p>
+<button onclick="alert('Скоро добавим открытие кейсов!')">Открыть</button>
 </div>
-
 <div class="case">
-<div class="picture">🐊</div>
-<h3>Rare Case</h3>
-<div class="desc">Редкие персонажи</div>
-<div class="price">🪙 1 500</div>
-<button class="disabled" disabled>СКОРО</button>
+<div class="case-img">💜</div>
+<h3>Редкий кейс</h3>
+<p>🪙 250 монет</p>
+<button onclick="alert('Скоро добавим открытие кейсов!')">Открыть</button>
 </div>
-
 <div class="case">
-<div class="picture">☕</div>
-<h3>Epic Case</h3>
-<div class="desc">Эпические персонажи</div>
-<div class="price">🪙 3 000</div>
-<button class="disabled" disabled>СКОРО</button>
-</div>
-
-<div class="case">
-<div class="picture">👑</div>
-<h3>Legendary Case</h3>
-<div class="desc">Легендарная коллекция</div>
-<div class="price">🪙 5 000</div>
-<button class="disabled" disabled>СКОРО</button>
-</div>
-
-<div class="case">
-<div class="picture">💎</div>
-<h3>Mystery Case</h3>
-<div class="desc">Особенные персонажи</div>
-<div class="price">🪙 10 000</div>
-<button class="disabled" disabled>СКОРО</button>
+<div class="case-img">👑</div>
+<h3>Легендарный кейс</h3>
+<p>🪙 500 монет</p>
+<button onclick="alert('Скоро добавим открытие кейсов!')">Открыть</button>
 </div>
 </div>
 </section>
 
-<section id="inventory">
-<h1>🎒 Мой инвентарь</h1>
-<div class="sub">Здесь хранятся твои Brainrot</div>
-<div id="items"></div>
-<button onclick="showCases()">← Назад к кейсам</button>
+<section class="page" id="cases">
+<h2>🎁 Все кейсы</h2>
+<p>Выбирай любой доступный кейс на главной странице.</p>
+</section>
+
+<section class="page" id="upgrade">
+<h2>⚡ Апгрейд</h2>
+<div class="info">Здесь можно будет улучшать своих Brainrot.</div>
+</section>
+
+<section class="page" id="inventory">
+<h2>🎒 Инвентарь</h2>
+<div class="info">Здесь будут храниться твои Brainrot.</div>
+</section>
+
+<section class="page" id="tasks">
+<h2>🪙 Задания</h2>
+<div class="info">Выполняй задания и получай бесплатные монеты.</div>
+</section>
+
+<section class="page" id="giveaways">
+<h2>🎉 Розыгрыши</h2>
+<div class="info">Здесь будут проходить розыгрыши.</div>
+</section>
+
+<section class="page" id="referrals">
+<h2>👥 Рефералы</h2>
+<div class="info">Приглашай друзей и получай бонусы.</div>
+</section>
+
+<section class="page" id="bonuses">
+<h2>🎁 Бонусы</h2>
+<div class="info">Здесь будут доступны бонусы.</div>
+</section>
+
+<section class="page" id="help">
+<h2>❓ Помощь</h2>
+<div class="info">Brainrot Boost — помощь и ответы на вопросы.</div>
 </section>
 </main>
 
-<div id="modal">
-<div class="window">
-<h2>🎁 Открытие кейса</h2>
-<div class="roulette">
-<div class="strip" id="strip"></div>
-</div>
-<div id="status">Кейс открывается...</div>
-
-<div id="prize">
-<div id="prizeEmoji"></div>
-<div id="prizeName"></div>
-<div id="prizeValue"></div>
-</div>
-
-<div class="actions" id="actions">
-<button class="sell" onclick="sellPrize()">🪙 ПРОДАТЬ</button>
-<button class="keep" onclick="keepPrize()">🎒 В ИНВЕНТАРЬ</button>
-</div>
-<button class="close" id="closeBtn" style="display:none" onclick="closeModal()">ЗАКРЫТЬ</button>
-</div>
-</div>
-
-<footer>Brainrot Boost © 2026</footer>
-
 <script>
-let coins=Number(localStorage.getItem("bb_coins")||0);
-let last=Number(localStorage.getItem("bb_last_open")||0);
-let inventory=JSON.parse(localStorage.getItem("bb_inventory")||"[]");
-let currentPrize=null;
-let busy=false;
-
-const drops=[
-{name:"Brainrot #001",emoji:"🐟",rarity:"Обычный",value:50},
-{name:"Brainrot #002",emoji:"🐊",rarity:"Редкий",value:100},
-{name:"Brainrot #003",emoji:"☕",rarity:"Эпический",value:200},
-{name:"Brainrot #004",emoji:"👑",rarity:"Легендарный",value:500}
-];
-
-function save(){
- localStorage.setItem("bb_coins",coins);
- localStorage.setItem("bb_last_open",last);
- localStorage.setItem("bb_inventory",JSON.stringify(inventory));
- update();
+function openMenu(){
+ document.getElementById('sidebar').classList.add('open');
+ document.getElementById('overlay').style.display='block';
 }
-function update(){
- document.getElementById("coins").textContent=coins;
- let left=43200000-(Date.now()-last);
- let btn=document.getElementById("freeBtn");
- if(left<=0){
-  document.getElementById("timer").textContent="Кейс готов!";
-  btn.disabled=false;
-  btn.textContent="ОТКРЫТЬ";
- }else{
-  let h=Math.floor(left/3600000);
-  let m=Math.floor(left%3600000/60000);
-  let s=Math.floor(left%60000/1000);
-  document.getElementById("timer").textContent=
-   "Следующий через "+h+"ч "+m+"м "+s+"с";
-  btn.disabled=true;
-  btn.textContent="ОЖИДАНИЕ";
- }
+function closeMenu(){
+ document.getElementById('sidebar').classList.remove('open');
+ document.getElementById('overlay').style.display='none';
 }
-function openCase(){
- if(busy || Date.now()-last<43200000)return;
- busy=true;
- last=Date.now();
- save();
- currentPrize=drops[Math.floor(Math.random()*drops.length)];
- let strip=document.getElementById("strip");
- strip.innerHTML="";
- let chosenIndex=17;
- for(let i=0;i<22;i++){
-  let d=i===chosenIndex?currentPrize:drops[Math.floor(Math.random()*drops.length)];
-  let tile=document.createElement("div");
-  tile.className="tile";
-  tile.innerHTML=d.emoji+"<small>"+d.rarity+"</small>";
-  strip.appendChild(tile);
- }
- let modal=document.getElementById("modal");
- modal.style.display="flex";
- document.getElementById("prize").style.display="none";
- document.getElementById("actions").style.display="none";
- document.getElementById("closeBtn").style.display="none";
- document.getElementById("status").textContent="Кейс открывается...";
- strip.style.transition="none";
- strip.style.transform="translateX(0)";
- requestAnimationFrame(()=>{
-  requestAnimationFrame(()=>{
-   let tileWidth=104;
-   let viewport=document.querySelector(".roulette").clientWidth;
-   let offset=viewport/2-(chosenIndex*tileWidth+48);
-   strip.style.transition="transform 5s cubic-bezier(.08,.75,.12,1)";
-   strip.style.transform="translateX("+offset+"px)";
-  });
- });
- setTimeout(()=>{
-  document.getElementById("status").textContent="🎉 ТВОЯ НАГРАДА!";
-  document.getElementById("prize").style.display="block";
-  document.getElementById("prizeEmoji").textContent=currentPrize.emoji;
-  document.getElementById("prizeName").textContent=currentPrize.name;
-  document.getElementById("prizeValue").textContent=
-   currentPrize.rarity+" · Цена продажи: "+currentPrize.value+" 🪙";
-  document.getElementById("actions").style.display="grid";
- },5300);
+function showPage(id,button){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.nav').forEach(b=>b.classList.remove('active'));
+ button.classList.add('active');
+ closeMenu();
+ window.scrollTo(0,0);
 }
-function sellPrize(){
- if(!currentPrize)return;
- coins+=currentPrize.value;
- currentPrize=null;
- save();
- finishChoice("Персонаж продан! Монеты добавлены на баланс 🪙");
-}
-function keepPrize(){
- if(!currentPrize)return;
- inventory.push(currentPrize);
- currentPrize=null;
- save();
- finishChoice("Персонаж добавлен в инвентарь! 🎒");
-}
-function finishChoice(message){
- document.getElementById("status").textContent=message;
- document.getElementById("prize").style.display="none";
- document.getElementById("actions").style.display="none";
- document.getElementById("closeBtn").style.display="block";
-}
-function closeModal(){
- document.getElementById("modal").style.display="none";
- busy=false;
- currentPrize=null;
-}
-function toggleMenu(){
- let s=document.getElementById("side");
- s.style.display=s.style.display==="block"?"none":"block";
-}
-function showCases(){
- document.getElementById("casePage").style.display="block";
- document.getElementById("inventory").style.display="none";
- document.getElementById("side").style.display="none";
-}
-function showInventory(){
- document.getElementById("casePage").style.display="none";
- document.getElementById("inventory").style.display="block";
- document.getElementById("side").style.display="none";
- renderInventory();
-}
-function renderInventory(){
- let box=document.getElementById("items");
- box.innerHTML="";
- if(inventory.length===0){
-  box.textContent="Пока здесь пусто. Открой бесплатный кейс!";
-  return;
- }
- inventory.forEach((item,index)=>{
-  let div=document.createElement("div");
-  div.className="item";
-  let info=document.createElement("span");
-  info.textContent=item.emoji+" "+item.name+" · "+item.rarity;
-  let price=document.createElement("span");
-  price.textContent=item.value+" 🪙";
-  div.append(info,price);
-  box.appendChild(div);
- });
-}
-update();
-setInterval(update,1000);
 </script>
 </body>
 </html>
