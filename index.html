@@ -31,7 +31,8 @@ button{cursor:pointer}
 .nav{display:flex;gap:12px;width:100%;padding:14px;margin:5px 0;border:0;border-radius:10px;background:transparent;color:white;text-align:left;font-size:16px}
 .nav.active{background:#3a2452}
 .close{float:right;background:none;border:0;color:white;font-size:25px}
-.page{display:none}.page.active{display:block}
+.page{display:none}
+.page.active{display:block}
 .info{background:#21172e;padding:17px;border-radius:14px;margin-top:15px}
 .inventory-item{background:#26183b;border:1px solid #493064;padding:12px;border-radius:12px;margin:8px 0}
 #caseModal{display:none;position:fixed;z-index:20;inset:0;background:#100d19;overflow:auto;padding:22px 14px;text-align:center}
@@ -47,7 +48,8 @@ button{cursor:pointer}
 .rarity{font-weight:bold;margin:8px}
 .result-buttons{display:flex;gap:10px;margin-top:18px}
 .result-buttons button{flex:1;border:0;border-radius:10px;padding:13px;color:white;font-weight:bold}
-.sell{background:#218c5a}.keep{background:#873bce}
+.sell{background:#218c5a}
+.keep{background:#873bce}
 .muted{color:#bda9d0;font-size:13px}
 </style>
 </head>
@@ -60,6 +62,7 @@ button{cursor:pointer}
 </header>
 
 <div id="overlay" onclick="closeMenu()"></div>
+
 <aside id="sidebar">
 <button class="close" onclick="closeMenu()">×</button>
 <div class="profile">
@@ -84,17 +87,46 @@ button{cursor:pointer}
 <p>Выбирай кейс и собирай свою коллекцию Brainrot.</p>
 <div class="cases" id="caseGrid"></div>
 </section>
+
 <section class="page" id="cases">
 <h2>🎁 Кейсы</h2>
 <p>Все доступные кейсы находятся на главной странице.</p>
 </section>
-<section class="page" id="upgrade"><h2>⚡ Апгрейд</h2><div class="info">Скоро здесь появится улучшение Brainrot.</div></section>
-<section class="page" id="inventory"><h2>🎒 Инвентарь</h2><div id="inventoryList"></div></section>
-<section class="page" id="tasks"><h2>🪙 Задания</h2><div class="info">Скоро здесь появятся задания и награды.</div></section>
-<section class="page" id="giveaways"><h2>🎉 Розыгрыши</h2><div class="info">Скоро здесь появятся розыгрыши.</div></section>
-<section class="page" id="referrals"><h2>👥 Рефералы</h2><div class="info">Приглашай друзей и получай бонусы. Функция скоро появится.</div></section>
-<section class="page" id="bonuses"><h2>🎁 Бонусы</h2><div class="info">Скоро здесь появятся бонусы.</div></section>
-<section class="page" id="help"><h2>❓ Помощь</h2><div class="info">Brainrot Boost — помощь и ответы на вопросы.</div></section>
+
+<section class="page" id="upgrade">
+<h2>⚡ Апгрейд</h2>
+<div class="info">Скоро здесь появится улучшение Brainrot.</div>
+</section>
+
+<section class="page" id="inventory">
+<h2>🎒 Инвентарь</h2>
+<div id="inventoryList"></div>
+</section>
+
+<section class="page" id="tasks">
+<h2>🪙 Задания</h2>
+<div class="info">Скоро здесь появятся задания и награды.</div>
+</section>
+
+<section class="page" id="giveaways">
+<h2>🎉 Розыгрыши</h2>
+<div class="info">Скоро здесь появятся розыгрыши.</div>
+</section>
+
+<section class="page" id="referrals">
+<h2>👥 Рефералы</h2>
+<div class="info">Приглашай друзей и получай бонусы. Функция скоро появится.</div>
+</section>
+
+<section class="page" id="bonuses">
+<h2>🎁 Бонусы</h2>
+<div class="info">Скоро здесь появятся бонусы.</div>
+</section>
+
+<section class="page" id="help">
+<h2>❓ Помощь</h2>
+<div class="info">Brainrot Boost — помощь и ответы на вопросы.</div>
+</section>
 </main>
 
 <div id="caseModal">
@@ -102,14 +134,21 @@ button{cursor:pointer}
 <strong id="modalTitle">Открытие кейса</strong>
 <button class="modal-close" id="modalClose" onclick="closeCase()">×</button>
 </div>
+
 <p class="muted">Смотри, кто тебе выпадет!</p>
-<div class="reel-window"><div class="reel" id="reel"></div></div>
+
+<div class="reel-window">
+<div class="reel" id="reel"></div>
+</div>
+
 <p id="spinText" class="muted">Рулетка запускается...</p>
+
 <div id="result">
 <div class="result-emoji" id="resultEmoji"></div>
 <h2 id="resultName"></h2>
 <div class="rarity" id="resultRarity"></div>
 <p id="resultValue"></p>
+
 <div class="result-buttons">
 <button class="sell" onclick="claimResult('sell')">🪙 Продать</button>
 <button class="keep" onclick="claimResult('keep')">🎒 В инвентарь</button>
@@ -124,12 +163,14 @@ const cases=[
  {id:"rare",name:"Редкий кейс",icon:"💜",price:250,weights:[35,30,25,10]},
  {id:"legend",name:"Легендарный кейс",icon:"👑",price:500,weights:[15,25,35,25]}
 ];
+
 const drops=[
  {name:"Рыбка",emoji:"🐟",rarity:"Обычный",value:25,color:"#b8b8b8"},
  {name:"Крокодил",emoji:"🐊",rarity:"Редкий",value:60,color:"#55d68b"},
  {name:"Кофейный",emoji:"☕",rarity:"Эпический",value:150,color:"#bd83ff"},
  {name:"Король",emoji:"👑",rarity:"Легендарный",value:400,color:"#ffd45c"}
 ];
+
 let coins=Number(localStorage.getItem("bb_coins")||0);
 let inventory=JSON.parse(localStorage.getItem("bb_inventory")||"[]");
 let freeTime=Number(localStorage.getItem("bb_free_time")||0);
@@ -142,19 +183,23 @@ function save(){
  localStorage.setItem("bb_free_time",freeTime);
  update();
 }
+
 function update(){
  document.getElementById("coins").textContent=coins;
  document.getElementById("sideCoins").textContent=coins;
  renderInventory();
 }
+
 function openMenu(){
  document.getElementById("sidebar").classList.add("open");
  document.getElementById("overlay").style.display="block";
 }
+
 function closeMenu(){
  document.getElementById("sidebar").classList.remove("open");
  document.getElementById("overlay").style.display="none";
 }
+
 function showPage(id,button){
  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
  document.getElementById(id).classList.add("active");
@@ -163,68 +208,129 @@ function showPage(id,button){
  closeMenu();
  window.scrollTo(0,0);
 }
-function freeReady(){return Date.now()>=freeTime}
+
+function freeReady(){
+ return Date.now()>=freeTime;
+}
+
 function freeLabel(){
  if(freeReady())return "Открыть бесплатно";
  let left=Math.ceil((freeTime-Date.now())/1000);
- let h=Math.floor(left/3600),m=Math.floor(left%3600/60);
+ let h=Math.floor(left/3600);
+ let m=Math.floor(left%3600/60);
  return `Через ${h} ч. ${m} мин.`;
 }
+
 function renderCases(){
  document.getElementById("caseGrid").innerHTML=cases.map(c=>{
- let disabled=c.id==="free"?!freeReady():coins<c.price;
- let label=c.id==="free"?freeLabel():`Открыть · 🪙 ${c.price}`;
- return `<div class="case">
- <div class="case-img">${c.icon}</div><h3>${c.name}</h3>
- <p>${c.id==="free"?"Бесплатно раз в 12 часов":"Цена: "+c.price+" монет"}</p>
- <button ${disabled?"disabled":""} onclick="openCase('${c.id}')">${label}</button>
- </div>`;
+  let disabled=c.id==="free"?!freeReady():coins<c.price;
+  let label=c.id==="free"?freeLabel():`Открыть · 🪙 ${c.price}`;
+
+  return `<div class="case">
+   <div class="case-img">${c.icon}</div>
+   <h3>${c.name}</h3>
+   <p>${c.id==="free"?"Бесплатно раз в 12 часов":"Цена: "+c.price+" монет"}</p>
+   <button ${disabled?"disabled":""} onclick="openCase('${c.id}')">${label}</button>
+  </div>`;
  }).join("");
 }
+
 function renderInventory(){
  const el=document.getElementById("inventoryList");
- if(!inventory.length){el.innerHTML='<div class="info">Пока здесь пусто. Открой свой первый кейс!</div>';return}
- el.innerHTML=inventory.map((d,i)=>`<div class="inventory-item">${d.emoji} <b>${d.name}</b> — ${d.rarity}<br><span class="muted">Стоимость: ${d.value} монет</span></div>`).join("");
+
+ if(!inventory.length){
+  el.innerHTML='<div class="info">Пока здесь пусто. Открой свой первый кейс!</div>';
+  return;
+ }
+
+ el.innerHTML=inventory.map(d=>`
+  <div class="inventory-item">
+   ${d.emoji} <b>${d.name}</b> — ${d.rarity}<br>
+   <span class="muted">Стоимость: ${d.value} монет</span>
+  </div>
+ `).join("");
 }
+
 function chooseDrop(c){
  let total=c.weights.reduce((a,b)=>a+b,0);
  let n=Math.random()*total;
- for(let i=0;i<c.weights.length;i++){n-=c.weights[i];if(n<0)return drops[i]}
+
+ for(let i=0;i<c.weights.length;i++){
+  n-=c.weights[i];
+  if(n<0)return drops[i];
+ }
+
  return drops[0];
 }
+
 function openCase(id){
- if(spinning)return;
+ if(spinning||pendingDrop)return;
+
  const c=cases.find(x=>x.id===id);
  if(!c)return;
- if(id==="free"&&!freeReady()){alert("Бесплатный кейс пока недоступен!");return}
- if(id!=="free"&&coins<c.price){alert("Недостаточно монет!");return}
- if(id==="free")freeTime=Date.now()+12*60*60*1000;
- else coins-=c.price;
+
+ if(id==="free"&&!freeReady()){
+  alert("Бесплатный кейс пока недоступен!");
+  return;
+ }
+
+ if(id!=="free"&&coins<c.price){
+  alert("Недостаточно монет!");
+  return;
+ }
+
+ if(id==="free"){
+  freeTime=Date.now()+12*60*60*1000;
+ }else{
+  coins-=c.price;
+ }
+
  save();
+
  pendingDrop=chooseDrop(c);
  spinning=true;
+
  document.getElementById("caseModal").style.display="block";
  document.getElementById("modalTitle").textContent=c.name;
  document.getElementById("modalClose").style.display="none";
  document.getElementById("result").style.display="none";
  document.getElementById("spinText").textContent="Рулетка запускается...";
+
  const reel=document.getElementById("reel");
- reel.style.transition="none";reel.style.transform="translateX(0)";
+ reel.style.transition="none";
+ reel.style.transform="translateX(0)";
+
  let items=[];
- for(let i=0;i<40;i++)items.push(drops[Math.floor(Math.random()*drops.length)]);
+
+ for(let i=0;i<40;i++){
+  items.push(drops[Math.floor(Math.random()*drops.length)]);
+ }
+
  items.push(pendingDrop);
- reel.innerHTML=items.map(d=>`<div class="reel-card" style="border-color:${d.color}">${d.emoji}<small>${d.rarity}</small></div>`).join("");
+
+ reel.innerHTML=items.map(d=>`
+  <div class="reel-card" style="border-color:${d.color}">
+   ${d.emoji}<small>${d.rarity}</small>
+  </div>
+ `).join("");
+
  requestAnimationFrame(()=>requestAnimationFrame(()=>{
   const win=document.querySelector(".reel-window");
   const target=40*100+45;
   const offset=win.clientWidth/2-target;
+
   reel.style.transition="transform 5s cubic-bezier(.08,.65,.12,1)";
   reel.style.transform=`translateX(${offset}px)`;
  }));
+
  setTimeout(showResult,5300);
 }
+
 function showResult(){
+ if(!pendingDrop)return;
+
  spinning=false;
+
  document.getElementById("spinText").textContent="🎉 Твой результат!";
  document.getElementById("resultEmoji").textContent=pendingDrop.emoji;
  document.getElementById("resultName").textContent=pendingDrop.name;
@@ -233,27 +339,38 @@ function showResult(){
  document.getElementById("resultValue").textContent="Стоимость: "+pendingDrop.value+" монет";
  document.getElementById("result").style.display="block";
 }
+
 function claimResult(mode){
- if(!pendingDrop)return;
+ if(!pendingDrop||spinning)return;
+
  if(mode==="sell"){
   coins+=pendingDrop.value;
-  alert("Продано! На баланс добавлено "+pendingDrop.value+" монет.");
- }else{
+ }else if(mode==="keep"){
   inventory.push(pendingDrop);
-  alert("Brainrot добавлен в инвентарь!");
+ }else{
+  return;
  }
+
  pendingDrop=null;
+
  save();
  closeCase();
 }
+
 function closeCase(){
  if(spinning||pendingDrop)return;
+
  document.getElementById("caseModal").style.display="none";
+ document.getElementById("modalClose").style.display="block";
+
  renderCases();
 }
+
 renderCases();
 update();
+
 setInterval(renderCases,30000);
 </script>
+
 </body>
 </html>
